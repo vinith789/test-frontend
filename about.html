@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Example</title>
+</head>
+<body>
+  <h1>Submit your data</h1>
+    <label>Name: <input type="text" name="name" id="name" /></label><br><br>
+    <label>Email: <input type="email" name="email" id="mail" /></label><br><br>
+    <button onclick="senddata()">Submit</button>
+
+
+  <script>
+
+    function senddata(){
+      const data = {
+        name:document.getElementById("name").value,
+        mail:document.getElementById("mail").value
+      };
+
+      fetch("http://localhost:3000/submit",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(data)
+      }).then(res => res.text()).then(msg => alert(msg)).catch(err => console.error(err))
+    }
+
+  </script>
+</body>
+</html>
